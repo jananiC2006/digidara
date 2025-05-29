@@ -1,0 +1,78 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Alumni Approvals</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header>
+    <h1>Admin Dashboard - Approve Alumni</h1>
+  </header>
+
+  <main class="table-container">
+    {% if alumni %}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Register No</th>
+            <th>Email</th>
+            <th>Batch</th>
+            <th>Department</th>
+            <th>Company</th>
+            <th>Position</th>
+            <th>LinkedIn</th>
+            <th>Status</th>
+            <th>Submitted On</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for alum in alumni %}
+          <tr>
+            <td>{{ alum[0] }}</td>
+            <td>{{ alum[1] }}</td>
+            <td>{{ alum[2] or '-' }}</td>
+            <td>{{ alum[3] }}</td>
+            <td>{{ alum[4] }}</td>
+            <td>{{ alum[5] }}</td>
+            <td>{{ alum[6] }}</td>
+            <td>{{ alum[7] }}</td>
+            <td>
+              {% if alum[8] %}
+                <a href="{{ alum[8] }}" target="_blank">Profile</a>
+              {% else %}
+                N/A
+              {% endif %}
+            </td>
+            <td>{{ alum[9] }}</td>
+            <td>{{ alum[10].strftime('%Y-%m-%d') }}</td>
+            <td>
+              {% if alum[9] != 'Approved' %}
+              <form method="POST" action="{{ url_for('admin_approval') }}">
+                <input type="hidden" name="alumni_id" value="{{ alum[0] }}">
+                <input type="hidden" name="status" value="Approved">
+                <button type="submit">Approve</button>
+              </form>
+              {% else %}
+                ✔️ Approved
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No alumni submissions yet.</p>
+    {% endif %}
+  </main>
+
+  <footer>
+    &copy; {{ current_year }} Alumni Interaction Portal. All rights reserved.
+  </footer>
+
+</body>
+</html>
