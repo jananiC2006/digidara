@@ -1,0 +1,103 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alumni Interaction Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header>
+    <h1>Alumni Interaction Portal</h1>
+  </header>
+
+  <main class="container">
+    <h2>Welcome to the Alumni Network</h2>
+    <p>Connect with our alumni, grow your network, and find inspiration for your career journey.</p>
+
+    <div class="buttons">
+      <a class="btn" href="{{ url_for('register_alumni') }}">Register as Alumni</a>
+      <a class="btn" href="{{ url_for('alumni_list') }}">View Alumni List</a>
+      <a class="btn" href="{{ url_for('admin_approval') }}">Admin Dashboard</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; {{ current_year }} Alumni Interaction Portal. All rights reserved.
+  </footer>
+
+</body>
+</html><style>/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body Style */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f8fb;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #003366;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* Main Container */
+.container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Headings */
+h1, h2 {
+  margin-bottom: 15px;
+}
+
+h2 {
+  color: #003366;
+}
+
+/* Paragraph */
+.container p {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+/* Button Group */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Buttons */
+.btn {
+  background-color: #0055a5;
+  color: white;
+  padding: 14px 28px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0078d4;
+}
+
+/* Footer */
+footer {
+  background-color: #e9ecef;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 60px;
+}</style>
