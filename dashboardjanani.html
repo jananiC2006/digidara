@@ -1,0 +1,107 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Verify Alumni</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 Alumni Portal</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/register">Register Alumni</a></li>
+      <li><a href="/alumni">Alumni List</a></li>
+      <li><a href="/admin">Admin</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Admin Panel: Verify Alumni</h1>
+
+    <div class="table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Batch</th>
+            <th>Department</th>
+            <th>Company</th>
+            <th>Position</th>
+            <th>LinkedIn</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for alum in alumni %}
+          <tr>
+            <td>{{ alum.name }}</td>
+            <td>{{ alum.batch }}</td>
+            <td>{{ alum.department }}</td>
+            <td>{{ alum.company }}</td>
+            <td>{{ alum.position }}</td>
+            <td>
+              <a href="{{ alum.linkedin_url }}" target="_blank">🔗</a>
+            </td>
+            <td>{{ alum.status }}</td>
+            <td>
+              <form method="POST" action="/admin" class="inline-form">
+                <input type="hidden" name="alumni_id" value="{{ alum.alumni_id }}" />
+                <select name="status" required>
+                  <option value="">Select</option>
+                  <option value="Approved">Approve</option>
+                  <option value="Rejected">Reject</option>
+                </select>
+                <button type="submit" class="btn small">✔</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div><style>.table-container {
+  overflow-x: auto;
+  margin-top: 30px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 700px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+  background-color: #003366;
+  color: white;
+}
+
+.admin-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.inline-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.inline-form select {
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 14px;
+}</style>

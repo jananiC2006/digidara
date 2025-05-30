@@ -1,0 +1,80 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alumni List</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 Alumni Portal</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/register">Register Alumni</a></li>
+      <li><a href="/alumni">Alumni List</a></li>
+      <li><a href="/admin">Admin</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Approved Alumni</h1>
+    <div class="alumni-grid">
+      {% for alum in alumni %}
+      <div class="alumni-card">
+        <h2>{{ alum.name }}</h2>
+        <p><strong>Batch:</strong> {{ alum.batch }}</p>
+        <p><strong>Department:</strong> {{ alum.department }}</p>
+        <p><strong>Company:</strong> {{ alum.company }}</p>
+        <p><strong>Position:</strong> {{ alum.position }}</p>
+        <p>
+          <a href="{{ alum.linkedin_url }}" target="_blank">
+            🔗 LinkedIn
+          </a>
+        </p>
+      </div>
+      {% else %}
+      <p>No alumni approved yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Alumni Interaction Portal</p>
+  </footer>
+</body>
+</html><style>.alumni-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.alumni-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.alumni-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.alumni-card h2 {
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.alumni-card a {
+  text-decoration: none;
+  color: #005cbf;
+  font-weight: bold;
+}
+
+.alumni-card a:hover {
+  text-decoration: underline;
+}</style>

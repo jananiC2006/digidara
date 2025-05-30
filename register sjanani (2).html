@@ -1,0 +1,170 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register Alumni</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 Alumni Portal</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/register">Register Alumni</a></li>
+      <li><a href="/alumni">Alumni List</a></li>
+      <li><a href="/admin">Admin</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Register as an Alumni</h1>
+    <form method="POST" action="/register" class="alumni-form">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="batch" placeholder="Batch (e.g., 2018-2021)" required />
+      <input type="text" name="department" placeholder="Department" required />
+      <input type="text" name="company" placeholder="Company" required />
+      <input type="text" name="position" placeholder="Position" required />
+      <input type="url" name="linkedin_url" placeholder="LinkedIn Profile URL" required />
+      <button type="submit" class="btn">Submit Registration</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Alumni Interaction Portal</p>
+  </footer>
+</body>
+</html><style>body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s ease;
+}
+
+/* NAVIGATION BAR */
+.navbar {
+  background-color: #003366;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #ffcc00;
+}
+
+/* MAIN CONTENT */
+.container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  text-align: center;
+  border-radius: 12px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #003366;
+}
+
+p {
+  color: #555;
+  font-size: 18px;
+}
+
+.nav-buttons {
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+  background-color: #005cbf;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #004494;
+  transform: translateY(-2px);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #999;
+}
+
+/* FORM STYLING */
+.alumni-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.alumni-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.alumni-form input:focus {
+  border-color: #005cbf;
+  box-shadow: 0 0 5px rgba(0, 92, 191, 0.4);
+  outline: none;
+}
+
+.alumni-form button {
+  width: fit-content;
+  align-self: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.alumni-form button:hover {
+  transform: scale(1.05);
+  background-color: #003f7f;
+}</style>
