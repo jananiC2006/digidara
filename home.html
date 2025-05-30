@@ -1,0 +1,30 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alumni Interaction Portal</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Alumni Interaction Portal</h1>
+  </header>
+
+  <main class="container">
+    <h2>Welcome to the Alumni Network</h2>
+    <p>Connect with our alumni, grow your network, and find inspiration for your career journey.</p>
+
+    <div class="buttons">
+      <a class="btn" href="{{ url_for('register_alumni') }}">Register as Alumni</a>
+      <a class="btn" href="{{ url_for('alumni_list') }}">View Alumni List</a>
+      <a class="btn" href="{{ url_for('admin_approval') }}">Admin Dashboard</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; {{ current_year }} Alumni Interaction Portal. All rights reserved.
+  </footer>
+
+</body>
+</html>
