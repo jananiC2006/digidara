@@ -1,0 +1,84 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>from flask import Flask, render_template, request, redirect
+from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+
+# -------------------------------------
+# MySQL Configuration
+# -------------------------------------
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'  # 🔁 Replace with your MySQL username
+app.config['MYSQL_PASSWORD'] = 'yourpassword'  # 🔁 Replace with your MySQL password
+app.config['MYSQL_DB'] = 'alumni_db'
+
+mysql = MySQL(app)
+
+# -------------------------------------
+# Home Page
+# -------------------------------------
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# -------------------------------------
+# Register Alumni
+# -------------------------------------
+@app.route('/register', methods=['GET', 'POST'])
+def register_alumni():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        batch = request.form['batch']
+        department = request.form['department']
+        company = request.form['company']
+        position = request.form['position']
+        linkedin_url = request.form['linkedin_url']
+
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            INSERT INTO alumni (name, email, batch, department, company, position, linkedin_url)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (name, email, batch, department, company, position, linkedin_url))
+        mysql.connection.commit()
+        cur.close()
+
+        return redirect('/alumni')  # Redirect after successful registration
+
+    return render_template('register_alumni.html')
+
+# -------------------------------------
+# View Approved Alumni List (Public)
+# -------------------------------------
+@app.route('/alumni')
+def alumni_list():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM alumni WHERE status = 'Approved' ORDER BY submitted_on DESC")
+    alumni = cur.fetchall()
+    cur.close()
+    return render_template('alumni_list.html', alumni=alumni)
+
+# -------------------------------------
+# Admin Panel - View & Update Status
+# -------------------------------------
+@app.route('/admin', methods=['GET', 'POST'])
+def admin_approval():
+    if request.method == 'POST':
+        alumni_id = request.form['alumni_id']
+        status = request.form['status']
+
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE alumni SET status = %s WHERE alumni_id = %s", (status, alumni_id))
+        mysql.connection.commit()
+        cur.close()
+
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM alumni ORDER BY submitted_on DESC")
+    alumni = cur.fetchall()
+    cur.close()
+    return render_template('admin_alumni.html', alumni=alumni)
+
+# -------------------------------------
+# Run the Flask app
+# -------------------------------------
+if __name__ == '__main__':
+    app.run(debug=True)
