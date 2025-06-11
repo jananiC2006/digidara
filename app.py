@@ -1,3 +1,5 @@
+
+
 # from flask import Flask, render_template, request,redirect
 # from flask_mysqldb import MySQL
 # import mysql.connector
@@ -85,7 +87,7 @@
 # if __name__ == '__main__':
 #     app.run(debug=True)
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,session,url_for
 import mysql.connector
 
 app = Flask(__name__)
@@ -130,6 +132,26 @@ def alumni_list():
     alumni = cursor.fetchall()
     return render_template('alumni_list.html', alumni=alumni)
 
+
+# Dummy credentials
+VALID_USERNAME = "admin"
+VALID_PASSWORD = "password123"
+
+@app.route('/admin_login',methods=['GET'])
+def admin_login():
+    return render_template('admin_login.html')
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+    
+    if username == VALID_USERNAME and password == VALID_PASSWORD:
+        return redirect(url_for('admin_alumni'))
+    else:
+        return "Invalid credentials. Please try again."  
+
+
 @app.route('/admin_alumni', methods=['GET', 'POST'])
 def admin_alumni():
     if request.method == 'POST':
@@ -160,6 +182,10 @@ def admin_alumni():
 @app.route('/thank')
 def thank():
     return render_template('thank.html')
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
